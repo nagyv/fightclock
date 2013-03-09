@@ -1,5 +1,5 @@
 /*global $,document,setTimeout,alert */
-var container = $('container');
+var container = $('#container');
 var loopCounter = document.getElementById('loops');
 var clock = document.getElementById('clock');
 var counter = document.getElementById('counter');
@@ -32,7 +32,7 @@ function runClock(ends, idx) {
 	} else {
 		var minutes = parseInt( ( ends - now / ( 1000 * 60 ) ) % 60, 10 );
 		var seconds = parseInt( ( ends - now / ( 1000 ) ) % 60, 10 );
-		clock.innerHTML = now.toLocaleTimeString();
+		//clock.innerHTML = (new Date()).toLocaleTimeString();
 		counter.innerHTML = zeroPadInteger(minutes) + ':' + zeroPadInteger(seconds);
 		setTimeout(function(){
 			runClock(ends, idx);
@@ -43,7 +43,7 @@ function runClock(ends, idx) {
 function startClock(idx) {
 	var expected_end;
 	try {
-		expected_end = Date.now() + parseFloat(container.children()[idx].attr("data-time"))*1000;
+		expected_end = Date.now() + parseFloat(container.children()[idx].dataset.time)*1000;
 	} catch(e) {
 		// no such idx
 		return false;
