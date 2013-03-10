@@ -35,3 +35,9 @@ footer{
 .hidden {
 	display: none;
 }
+.clock {
+	border: 2px solid #000;
+	border-radius: 5px;
+	width: 200px;
+	padding: auto;
+}

@@ -12,7 +12,7 @@
 		<aside class="hidden"><h2>Presets</h2></aside>
 		<aside class="hidden"><h2>New preset</h2>
 		<input type="text" id="preset_name" placeholder="Name it!" />
-		<ul id="clock"></ul>
+		<ul id="clocksetup"></ul>
 		<label>Loop counter <input type="number" id="loop_counts" placeholder="0 means an endless loop" /></label>
 		<button id="add">+</button>
 		<button id="save">Save</button>
@@ -20,7 +20,7 @@
 		<section><h2>Timer</h2>
 		<ul id="container" class="hidden"></ul>
 		<input type="hidden" id="loops" />
-		<div id="clock"></div><div id="counter"></div>
+		<div id="clock" class="clock"></div><div id="counter" class="clock"></div>
 		<button id="start_timer">Start</button>
 		<button id="pause_timer">Pause</button>
 		<button id="stop_timer">Stop</button>
@@ -28,6 +28,8 @@
 	<footer>
 	</footer>
 	<script src="jquery.js"></script>
+	<script src="bacon.js"></script>
+	<script src="audio.js"></script>
 	<script src="clock.js"></script>
 	<script src="presets.js"></script>
 	<script>

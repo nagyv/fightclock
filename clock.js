@@ -1,8 +1,24 @@
-/*global $,document,setTimeout,alert */
+/*global $,document,setTimeout,console,Bacon */
+var now = Bacon.fromPoll(1000, function(){
+	return new Bacon.Next(Date.now());
+});
+var running = new Bacon.Bus();
+
 var container = $('#container');
 var loopCounter = document.getElementById('loops');
-var clock = document.getElementById('clock');
-var counter = document.getElementById('counter');
+var clockUI = document.getElementById('clock');
+var counterUI = document.getElementById('counter');
+
+now.onValue(function(now) {
+	clockUI.innerHTML = (new Date()).toLocaleTimeString();
+});
+running.onValue(function(running) {
+	if(running) {
+		console.log('started to run');
+	} else {
+		console.log('timer stopped');
+	}
+});
 
 function zeroPadInteger( num ) {
 	var str = "00" + parseInt( num, 10 );
@@ -20,23 +36,14 @@ function getSeconds(timing) {
 	}
 }
 
-function clockStopped(idx) {
-	alert('the clock stopped');
-	startClock(++idx);
-}
-
-function runClock(ends, idx) {
-	var now = Date.now();
-	if(Date.now() >= ends) {
-		clockStopped(idx);
+function runClock(ends, now) {
+	if(now >= ends) {
+		running.push(false);
+		return Bacon.noMore;
 	} else {
-		var minutes = parseInt( ( ends - now / ( 1000 * 60 ) ) % 60, 10 );
-		var seconds = parseInt( ( ends - now / ( 1000 ) ) % 60, 10 );
-		//clock.innerHTML = (new Date()).toLocaleTimeString();
-		counter.innerHTML = zeroPadInteger(minutes) + ':' + zeroPadInteger(seconds);
-		setTimeout(function(){
-			runClock(ends, idx);
-		}, 1000);
+		var minutes = parseFloat( ( (ends - now) / ( 1000 * 60 ) ) % 60);
+		var seconds = parseFloat( ( (ends - now) / ( 1000 ) ) % 60);
+		counterUI.innerHTML = zeroPadInteger(minutes) + ':' + zeroPadInteger(seconds);
 	}
 }
 
@@ -48,7 +55,11 @@ function startClock(idx) {
 		// no such idx
 		return false;
 	}
-	runClock(expected_end, idx);
+	running.push(true);
+	now.onValue(runClock, expected_end);
+	if(loopCounter.value === 0) {
+		
+	}
 }
 
 function loadClock(options) {
@@ -60,4 +71,3 @@ function loadClock(options) {
 	 startClock(0);
 	}
 }
-
