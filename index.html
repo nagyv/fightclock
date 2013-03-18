@@ -9,35 +9,31 @@
 	<header>
 		<h1>Fight Clock</h1>
 	</header>
-		<aside class="hidden"><h2>Presets</h2></aside>
-		<aside class="hidden"><h2>New preset</h2>
-		<input type="text" id="preset_name" placeholder="Name it!" />
-		<ul id="clocksetup"></ul>
-		<label>Loop counter <input type="number" id="loop_counts" placeholder="0 means an endless loop" /></label>
-		<button id="add">+</button>
-		<button id="save">Save</button>
-		</aside>
 		<section><h2>Timer</h2>
-		<ul id="container" class="hidden"></ul>
-		<input type="hidden" id="loops" />
-		<div id="clock" class="clock"></div><div id="counter" class="clock"></div>
+		<select name="presets" id="preset_list"></select>
 		<button id="start_timer">Start</button>
-		<button id="pause_timer">Pause</button>
-		<button id="stop_timer">Stop</button>
+		<!-- <button id="pause_timer">Pause</button> -->
+		<button id="stop_timer" class="hidden">Stop</button>
+		<div id="clock" class="clock"></div>
+		<div id="counter" class="clock hidden"></div>
+		<div id="loops" class="clock hidden"></div>
+		<div id="status" class="clock hidden"></div>
         </section>
+        <a href="presets.html">Presets</a>
+		<audio src="dora.wav" preload="auto" id="gong"></audio>
 	<footer>
 	</footer>
 	<script src="jquery.js"></script>
+	<script src="lodash.min.js"></script>
 	<script src="bacon.js"></script>
-	<script src="audio.js"></script>
 	<script src="clock.js"></script>
 	<script src="presets.js"></script>
 	<script>
-		loadClock({
-			clock: ['1m', '20s'],
-			loops: 2,
-			autoStart: true
-		});
+		// loadClock({
+		// 	clock: ['5s', '6s'],
+		// 	loops: 2,
+		// 	autoStart: true
+		// });
 	</script>
 	</body>
 </html>
