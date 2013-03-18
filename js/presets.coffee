@@ -14,7 +14,6 @@ lget = (key) ->
 
 $presets = $ "#presets"
 $preset_container = $ ".preset"
-$presetFields = $ "#presetFields"
 $presetForm = $ "#presetForm"
 $presetForm.submit (ev) ->
 	ev.preventDefault()
@@ -38,7 +37,7 @@ save_preset_click.onValue (ev) ->
 	key = guid()
 	data = {
 		name: document.getElementById( "preset_name").value,
-		clock: (getValue wrapper for wrapper in $presetFields.find('.preset')),
+		clock: (getValue wrapper for wrapper in $presetForm.find('.preset')),
 		loops: document.getElementById( "preset_loops").value
 	}
 	lset key, data

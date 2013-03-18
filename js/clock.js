@@ -26,6 +26,10 @@
 
   statusUI = document.getElementById("status");
 
+  $("form").submit(function(ev) {
+    return ev.preventDefault();
+  });
+
   zeroPadInteger = function(num) {
     var str;
     str = "00" + parseInt(num, 10);

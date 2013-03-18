@@ -14,6 +14,8 @@ gong.addEventListener "ended", ->
 counterUI = document.getElementById 'counter'
 loopsUI = document.getElementById "loops"
 statusUI = document.getElementById "status"
+$("form").submit (ev) ->
+	ev.preventDefault()
 
 zeroPadInteger = ( num ) ->
 	str = "00" + parseInt( num, 10 )
